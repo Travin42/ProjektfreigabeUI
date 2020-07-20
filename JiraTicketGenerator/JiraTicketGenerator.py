@@ -1,11 +1,11 @@
 # -*- coding: utf-8 -*-
 
-from PyQt4 import QtGui, QtCore
+from PyQt5 import QtGui, QtCore, QtWidgets
 import sys
-import MainWindow
-import PFGcreator
+from . import JiraTicketGenerationUI
+#import PFGcreator
 
-class MainUi (QtGui.QMainWindow, MainWindow.Ui_PFG):
+class MainUi (QtWidgets.QMainWindow, JiraTicketGenerationUI.Ui_PFG):
 
     FreigabeArt = None
     def __init__(self):
@@ -37,7 +37,7 @@ class MainUi (QtGui.QMainWindow, MainWindow.Ui_PFG):
 
 
 def main():
-    app = QtGui.QApplication(sys.argv)
+    app = QtWidgets.QApplication(sys.argv)
     PFG = MainUi()
     PFG.show()
     sys.exit(app.exec_())
