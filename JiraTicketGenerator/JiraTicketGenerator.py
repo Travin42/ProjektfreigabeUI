@@ -2,7 +2,7 @@ import sys
 from PyQt5 import QtGui, QtCore, QtWidgets
 
 from JiraTicketGenerator import JiraTicketGenerationUI
-from JiraTicketGenerator.csv_generator import csv_generator as CSV_Generator
+from JiraTicketGenerator.utils import csv_generator
 
 class MainUi (QtWidgets.QMainWindow, JiraTicketGenerationUI.Ui_PFG):
 
@@ -19,14 +19,6 @@ class MainUi (QtWidgets.QMainWindow, JiraTicketGenerationUI.Ui_PFG):
         exit_action.setShortcut('Ctrl+Q')
         exit_action.triggered.connect(self.close)
         self.file_menu.addAction(exit_action)
-
-    def changeFreigabe(self):
-        if self.radioButton.isChecked():
-            self.FreigabeArt = 'Vorserienfreigabe'
-        if self.radioButton_2.isChecked():
-            self.FreigabeArt = 'Serienfreigabe'
-        if self.radioButton_3.isChecked():
-            self.FreigabeArt = 'Prototypfreigabe'
 
     @QtCore.pyqtSlot()
     def on_btn_add_column_clicked(self):
@@ -64,9 +56,15 @@ class MainUi (QtWidgets.QMainWindow, JiraTicketGenerationUI.Ui_PFG):
         row_count -= 1
         self.table.setRowCount(row_count)
 
-    @QtCore.pyqtSlot()
     def close(self):
         QtWidgets.QApplication.exit()
+
+    @QtCore.pyqtSlot()
+    def on_btn_create_csv_clicked(self):
+        data = QtCore.QMimeData()
+        self.table.items(data)
+        print(data)
+        csv_generator.CSVGenerator(self.table.item(0, 0))
 
 def main():
     app = QtWidgets.QApplication([])

@@ -42,9 +42,13 @@ class Ui_PFG(object):
         self.buttonLayout.addWidget(self.btn_add_row, 1, 0)
         self.buttonLayout.addWidget(self.btn_delete_row, 1, 1)
 
+        self.buttonCreateCSV = QtWidgets.QPushButton(' Create CSV')
+        self.buttonCreateCSV.setObjectName('btn_create_csv')
+
         layout.addLayout(self.buttonLayout)
         layout.addStretch()
         layout.addWidget(self.table,  QtCore.Qt.AlignTop)
+        layout.addWidget(self.buttonCreateCSV)
 
         QtCore.QMetaObject.connectSlotsByName(UI)
 
