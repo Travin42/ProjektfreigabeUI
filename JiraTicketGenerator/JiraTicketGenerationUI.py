@@ -36,7 +36,7 @@ class Ui_PFG(object):
         self.btn_delete_row = QtWidgets.QPushButton('Delete Row')
         self.btn_delete_row.setObjectName('btn_delete_row')
 
-        self.table = QtWidgets.QTableWidget(2, 4)
+        self.table = QtWidgets.QTableWidget(1, 4)
         self.buttonLayout.addWidget(self.btn_add_column, 0, 0)
         self.buttonLayout.addWidget(self.btn_delete_column, 0, 1)
         self.buttonLayout.addWidget(self.btn_add_row, 1, 0)
@@ -51,6 +51,11 @@ class Ui_PFG(object):
         layout.addWidget(self.buttonCreateCSV)
 
         QtCore.QMetaObject.connectSlotsByName(UI)
+        self.retranslateUi(self)
 
-    def retranslateUi(self, ItemGenerator):
-        ItemGenerator.setWindowTitle(_translate("ItemGenerator", "Dialog", None))
+    def retranslateUi(self, UI):
+        UI.setWindowTitle(_translate("UI", "Dialog", None))
+        self.table.setHorizontalHeaderItem(0, QtWidgets.QTableWidgetItem(str('Work Item Type')))
+        self.table.setHorizontalHeaderItem(1, QtWidgets.QTableWidgetItem(str('Title')))
+        self.table.setHorizontalHeaderItem(2, QtWidgets.QTableWidgetItem(str('Assigned To')))
+        self.table.setHorizontalHeaderItem(3, QtWidgets.QTableWidgetItem(str('State')))

@@ -41,10 +41,8 @@ class MainUi (QtWidgets.QMainWindow, JiraTicketGenerationUI.Ui_PFG):
 
     @QtCore.pyqtSlot()
     def on_btn_create_csv_clicked(self):
-        for row in range(self.table.rowCount()):
-            for column in range(self.table.columnCount()):
-                print(self.table.item(row, column))
-        csv_generator.CSVGenerator(self.table.item(0, 0))
+        csv = csv_generator.CSVGenerator(self.table)
+        csv.writeCsv()
 
 def main():
     app = QtWidgets.QApplication([])
