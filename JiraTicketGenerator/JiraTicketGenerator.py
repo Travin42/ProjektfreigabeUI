@@ -22,48 +22,28 @@ class MainUi (QtWidgets.QMainWindow, JiraTicketGenerationUI.Ui_PFG):
 
     @QtCore.pyqtSlot()
     def on_btn_add_column_clicked(self):
-        self.addColumn()
+        self.table.insertColumn(self.table.columnCount())
 
     @QtCore.pyqtSlot()
     def on_btn_delete_column_clicked(self):
-        self.deleteColumn()
+        self.table.removeColumn(self.table.columnCount() - 1)
 
     @QtCore.pyqtSlot()
     def on_btn_add_row_clicked(self):
-        self.addRow()
+        self.table.insertRow(self.table.rowCount())
 
     @QtCore.pyqtSlot()
     def on_btn_delete_row_clicked(self):
-        self.deleteRow()
-
-    def addColumn(self):
-        column_count = self.table.columnCount()
-        column_count += 1
-        self.table.setColumnCount(column_count)
-
-    def deleteColumn(self):
-        column_count = self.table.columnCount()
-        column_count -= 1
-        self.table.setColumnCount(column_count)
-
-    def addRow(self):
-        row_count = self.table.rowCount()
-        row_count += 1
-        self.table.setRowCount(row_count)
-
-    def deleteRow(self):
-        row_count = self.table.rowCount()
-        row_count -= 1
-        self.table.setRowCount(row_count)
+        self.table.removeRow(self.table.rowCount() - 1)
 
     def close(self):
         QtWidgets.QApplication.exit()
 
     @QtCore.pyqtSlot()
     def on_btn_create_csv_clicked(self):
-        data = QtCore.QMimeData()
-        self.table.items(data)
-        print(data)
+        for row in range(self.table.rowCount()):
+            for column in range(self.table.columnCount()):
+                print(self.table.item(row, column))
         csv_generator.CSVGenerator(self.table.item(0, 0))
 
 def main():
